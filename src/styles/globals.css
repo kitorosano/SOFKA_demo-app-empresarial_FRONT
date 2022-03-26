@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  background-color: whitesmoke;
+}
+
 @layer base {
   .appContainer {
     @apply flex justify-center items-center text-center mx-auto mt-5
@@ -18,6 +22,6 @@
   }
 
   .errorAlert {
-    @apply py-4 font-semibold uppercase text-sm text-center text-red-700
+    @apply items-center font-semibold uppercase text-sm text-center text-red-700
   }
 }

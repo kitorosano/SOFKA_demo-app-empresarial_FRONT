@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
     case RANDOM_RESULTS: {
       return {
         ...state,
-        results: action.payload,
+        results: action.payload.map(time => time.slice(0, -3)), // 18:00:00  -> 18:00
         error: null
       }
     }

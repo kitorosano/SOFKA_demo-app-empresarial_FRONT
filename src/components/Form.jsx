@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { generarRandoms } from '../actions';
 
 function Form() {
-	const loading = useSelector((state) => state.view.loading);
 	const dispatch = useDispatch();
 
 	const generateManyRef = useRef(null);
@@ -71,7 +70,7 @@ function Form() {
 						type='time'
 						id='generateBefore'
 						ref={generateBeforeRef}
-						className='inputForm'
+						className='inputForm' 
 					/>
 				</div>
 			</div>
