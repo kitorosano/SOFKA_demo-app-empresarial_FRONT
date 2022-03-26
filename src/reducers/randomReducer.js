@@ -11,12 +11,14 @@ export default function(state = initialState, action) {
     case RANDOM_RESULTS: {
       return {
         ...state,
-        results: action.payload
+        results: action.payload,
+        error: null
       }
     }
     case RANDOM_ERROR_SHOW: {
       return {
         ...state, 
+        results: [],
         error: action.payload
       }
     }

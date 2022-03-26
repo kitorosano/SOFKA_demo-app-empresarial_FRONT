@@ -1,14 +1,19 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Result() {
-	const result = useSelector((state) => state.random.result);
+	const results = useSelector((state) => state.random.results);
 	const error = useSelector((state) => state.random.error);
+	const loading = useSelector((state) => state.view.loading);
 
-	const dispatch = useDispatch();
 	return (
 		<div className='px-4 py-3 mt-1 border-2 border-dashed border-gray-200 rounded-lg'>
-			{error ? <div className='errorAlert'>{error}</div> : null}
+			{!loading && error && <div className='errorAlert'>{error}</div>}
+      <ul className="flex flex-col flex-wrap h-[15rem]">
+      {!loading && results && results.map(randomTime => 
+        <li className="flex-1" key={randomTime}> {"▪ "}{randomTime}</li>
+      )}
+      </ul>
 		</div>
 	);
 }

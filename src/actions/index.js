@@ -1,21 +1,47 @@
-import { RANDOM_ERROR_HIDE, RANDOM_ERROR_SHOW, RANDOM_RESULTS, VIEW_LOADED, VIEW_LOADING } from '../types';
+import {
+	RANDOM_ERROR_HIDE,
+	RANDOM_ERROR_SHOW,
+	RANDOM_RESULTS,
+	VIEW_LOADED,
+	VIEW_LOADING,
+} from '../types';
 
 import clienteAxios from '../config/axios';
 
-export const generarRandoms = (randomBody) => async (dispatch) =>{
-  dispatch({ type: VIEW_LOADING });
+export const generarRandoms = (randomBody) => async (dispatch) => {
+	dispatch(viewLoading());
 
-  try {
-    const respuesta = await clienteAxios.post('', randomBody);
-    // console.log(respuesta.data)
+	try {
+		const respuesta = await clienteAxios.post('', randomBody);
+		// console.log(respuesta.data)
 
-    dispatch({ type: RANDOM_RESULTS, payload: respuesta.data.randomClockList });
-    dispatch({ type: VIEW_LOADED });
-  } catch (error) {
-    dispatch({type: RANDOM_ERROR_SHOW, payload: error.response.data});
-    
-    setTimeout(() => {
-      dispatch({ type: RANDOM_ERROR_HIDE })
-    }, 5000);
-  }
-}
+		dispatch(randomSetResults(respuesta.data.randomClockList));
+	} catch (error) {
+		dispatch(randomSetErrorShow(error.response.data));
+
+		setTimeout(() => {
+			dispatch(randomSetErrorHide());
+		}, 5000);
+	} finally {
+		dispatch(viewLoaded());
+	}
+};
+
+const randomSetResults = (results) => ({
+	type: RANDOM_RESULTS,
+	payload: results,
+});
+const randomSetErrorShow = (message) => ({
+	type: RANDOM_ERROR_SHOW,
+	payload: message,
+});
+const randomSetErrorHide = () => ({
+	type: RANDOM_ERROR_HIDE,
+});
+
+const viewLoading = () => ({
+	type: VIEW_LOADING,
+});
+const viewLoaded = () => ({
+	type: VIEW_LOADED,
+});
