@@ -5,7 +5,7 @@ import Result from '../components/Result';
 function App() {
 	return (
 		<div className='appContainer'>
-			<div>
+			<div className="w-1/3">
         <h1 className='text-3xl font-bold underline'>Random Clock Time Generator</h1>
         <Form />
         <Result />
